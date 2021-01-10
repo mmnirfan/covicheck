@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covicheck Configurator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--- Script -->
+    <script src="factory.js"></script>
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+      }
+      
+      .sidenav {
+        height: 100%;
+        width: 180px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #ddd;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #000000;
+        display: block;
+      }
+      
+      .sidenav a:hover {
+        color: orange;
+      }
+      .sidenav a h4:hover {
+        color: green;
+      }
+
+      
+      .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+      }
+      @media screen and (min-width: 768px) and (max-width:1028px) {
+        strong {font-size: 0.9em;}
+        .sidenav a {font-size: 18px;}
+        .sidenav {width: 163px;}
+        h2 {font-size: 1.4em;}
+      }
+      @media screen and (min-width: 480px) and (max-width:767px) {
+        strong {font-size: 0.8em;}
+        .sidenav a {font-size: 16px;}
+        .sidenav {width: 146px;}
+        h2 {font-size: 1.3em;}
+      }
+
+      @media screen and (min-width: 320px) and (max-width:479px) {
+        strong {font-size: 0.7em;}
+        .sidenav a {font-size: 14px;}
+        .sidenav {width: 129px;}
+        h2 {font-size: 1.2em;}
+      }
+
+      @media screen and (max-width: 320px) {
+        strong {font-size: 0.6em;}
+        .sidenav a {font-size: 12px;}
+        .sidenav {width: 112px;}
+        h2 {font-size: 1.1em;}
+      }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container-fluid">
+            <h2 class="p-3 text-center">Factory Setting</h2>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="sidenav">
+                        <a><h4><strong>Covicheck Configurator</strong></h4></a>
+                        <a href="index.html">Home</a>
+                        <a href="wifi_setting.html">WiFi Settings</a>
+                        <a href="factory_settings.html">Factory Settings</a>
+                        <a href="update.html"></a>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="card p-3">
+                        <form id="myForm">
+                            <div class="form-group">
+                                <label for="Unit">Temp. Unit :</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="unit">
+                                        <option value disabled selected hidden>Select Temp Unit</option>
+                                        <option>C</option>
+                                        <option>F</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="proximityMax">Min Temp :</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="tempMin" placeholder="Min Temperature">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="proximityMax">Max Temp :</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="tempMax" placeholder="Max Temperature">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="proximityMin">Proximity Min :</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="minProx" placeholder="Proximity Min">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="proximityMax">Proximity Max :</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="maxProx" placeholder="Proximity Max">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="deviceType">Device Type :</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="device_Type">
+                                        <option value disabled selected hidden>Select Device Type</option>
+                                        <option value="0">Proximity Device</option>
+                                        <option value="1">Wi-Fi and QR Stickerits</option>
+                                        <option value="2">QR Reader</option>
+                                        <option value="3">RFID Deviceits</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success mt-3" onclick="update()">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="card p-3">
+                        <h4 class="p-3 text-center">Current-Config</h4>
+                        <form>
+                          <div class="form-group row">
+                            <label for="min Temp" class="col-sm-5 col-form-label">Min Temp:</label>
+                            <div class="col-sm-7">
+                              <input type="text" readonly class="form-control-plaintext" id="minTemp" value="">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="max Temp" class="col-sm-5 col-form-label">Max Temp:</label>
+                            <div class="col-sm-7">
+                              <input type="text" readonly class="form-control-plaintext" id="maxTemp" value="">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="prox Min" class="col-sm-5 col-form-label">Prox Min:</label>
+                            <div class="col-sm-7">
+                              <input type="text" readonly class="form-control-plaintext" id="proxMin" value="">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="prox Max" class="col-sm-5 col-form-label">Prox Max:</label>
+                            <div class="col-sm-7">
+                              <input type="text" readonly class="form-control-plaintext" id="proxMax" value="">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="temp Unit" class="col-sm-5 col-form-label">Temp Unit:</label>
+                            <div class="col-sm-7">
+                              <input type="text" readonly class="form-control-plaintext" id="tempUnit" value="">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="deviceType" class="col-sm-5 col-form-label">Dev Type:</label>
+                            <div class="col-sm-7">
+                              <input type="text" readonly class="form-control-plaintext" id="deviceType" value="">
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- The Modal -->
+     <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">User Login for Update</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="update.html" method="POST" onSubmit="return checkLoginPass();">
+                    <div class="form-group">
+                      <label for="userId">User Id:</label>
+                      <input type="text" id="userId" class="form-control" placeholder="Enter Id">
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Password:</label>
+                      <input type="password" id="password" class="form-control" placeholder="Enter password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+    </div> <!-- Modal End -->
+
+    <!-- The Modal-2 -->
+    <div class="modal fade" id="myModal_2">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">User Login for Factory Settings</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="factory_settings.html" method="POST" onSubmit="return checkLoginPassword();">
+                    <div class="form-group">
+                      <label for="userId">User Id:</label>
+                      <input type="text" id="user" class="form-control" placeholder="Enter Id">
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Password:</label>
+                      <input type="password" id="pass" class="form-control" placeholder="Enter password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+    </div> <!-- Modal-2 End -->
+
+</body>
+</html>
