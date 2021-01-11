@@ -115,14 +115,14 @@ function appendData(data) {
 appendData();
 
 function getProximityMin(){
-    url = "https://api.github.com/users";
+    url = "/object_proximity/";
     var proxMin = document.getElementById('minProx');
     fetch(url).then((response)=>{
         return response.json();
     }).then((data)=>{
-        console.log(data[0].login);
+        console.log(data.object_proximity);
         proxMin.value = "";
-        proxMin.value = data[0].login;
+        proxMin.value = data.object_proximity;
     })
     .catch(function (err) {
         console.log('error: ' + err);
@@ -130,14 +130,14 @@ function getProximityMin(){
 
 }
 function getProximityMax(){
-    url = "https://api.github.com/users";
+    url = "/object_proximity/";
     var proxMax = document.getElementById('maxProx');
     fetch(url).then((response)=>{
         return response.json();
     }).then((data)=>{
-        console.log(data[0].login);
+        console.log(data.object_proximity);
         proxMax.value = "";
-        proxMax.value = data[0].login;
+        proxMax.value = data.object_proximity;
     })
     .catch(function (err) {
         console.log('error: ' + err);
