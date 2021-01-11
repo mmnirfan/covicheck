@@ -132,3 +132,34 @@ appendData();
 //     })
 
 // }
+
+function getProximityMin(){
+    url = "https://api.github.com/users";
+    var proxMin = document.getElementById('minProx');
+    fetch(url).then((response)=>{
+        return response.json();
+    }).then((data)=>{
+        console.log(data[0].login);
+        proxMin.value = "";
+        proxMin.value = data[0].login;
+    })
+    .catch(function (err) {
+        console.log('error: ' + err);
+    })
+
+}
+function getProximityMax(){
+    url = "https://api.github.com/users";
+    var proxMax = document.getElementById('maxProx');
+    fetch(url).then((response)=>{
+        return response.json();
+    }).then((data)=>{
+        console.log(data[0].login);
+        proxMax.value = "";
+        proxMax.value = data[0].login;
+    })
+    .catch(function (err) {
+        console.log('error: ' + err);
+    })
+
+}

@@ -55,12 +55,12 @@
           .sidenav {width: 163px;}
           h2 {font-size: 1.4em;}
           #content{margin-left: 180px;}
-          #current_config{position: absolute; top: 65px; right: 30px;}
+          #current_config{position: absolute; top: 65px; right: 100px;}
           .card{width: 350px;}
         }
-      @media screen and (min-width: 970px) and (max-width:1028px) {
+      @media screen and (min-width: 1030px) and (max-width:1028px) {
 
-        #current_config{position: absolute; top: 65px; right: 30px;}
+        #current_config{position: absolute; top: 65px; right: 100px;}
         .card{width: 350px;}
       }
       @media screen and (min-width: 768px) and (max-width:1028px) {
@@ -111,8 +111,8 @@
         <div class="card p-3 mt-3 mb-5">
           <form id="myForm">
               <div class="form-group">
-                  <label for="Unit" class="col-12 col-sm-4 col-md-6 col-lg-6">Temp. Unit :</label>
-                  <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+                  <label for="Unit" class="col-12 col-sm-6 col-md-12 col-lg-12">Temp. Unit :</label>
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
                       <select class="form-control" id="unit">
                           <option value disabled selected hidden>Select Temp Unit</option>
                           <option>C</option>
@@ -121,32 +121,34 @@
                   </div>
               </div>
               <div class="form-group">
-                  <label for="proximityMax" class="col-12 col-sm-4 col-md-6 col-lg-6">Min Temp :</label>
-                  <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+                  <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Min Temp :</label>
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
                     <input type="text" class="form-control" id="tempMin" placeholder="Min Temperature">
                   </div>
               </div>
               <div class="form-group">
-                  <label for="proximityMax" class="col-12 col-sm-4 col-md-6 col-lg-6">Max Temp :</label>
-                  <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+                  <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Max Temp :</label>
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
                     <input type="text" class="form-control" id="tempMax" placeholder="Max Temperature">
                   </div>
               </div>
               <div class="form-group">
-                  <label for="proximityMin" class="col-12 col-sm-4 col-md-6 col-lg-6">Proximity Min :</label>
-                  <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+                  <label for="proximityMin" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Min :</label>
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
                     <input type="text" class="form-control" id="minProx" placeholder="Proximity Min">
+                    <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMin();">Get Proximity</button>
                   </div>
               </div>
               <div class="form-group">
-                  <label for="proximityMax" class="col-12 col-sm-4 col-md-6 col-lg-6">Proximity Max :</label>
-                  <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+                  <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Max :</label>
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
                     <input type="text" class="form-control" id="maxProx" placeholder="Proximity Max">
+                    <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMax();">Get Proximity</button>
                   </div>
               </div>
               <div class="form-group">
-                  <label for="deviceType" class="col-12 col-sm-4 col-md-6 col-lg-6">Device Type :</label>
-                  <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+                  <label for="deviceType" class="col-12 col-sm-6 col-md-12 col-lg-12">Device Type :</label>
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
                       <select class="form-control" id="device_Type">
                           <option value disabled selected hidden>Select Device Type</option>
                           <option value="0">Proximity Device</option>
@@ -163,38 +165,38 @@
           <h2 class="p-3 text-center">Current-Config</h2>
           <form>
             <div class="form-group row">
-              <label for="min Temp" class="col-12 col-sm-4 col-md-6 col-lg-6 col-form-label">Min Temp:</label>
-              <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+              <label for="min Temp" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Min Temp:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <input type="text" readonly class="form-control-plaintext" id="minTemp" value="">
               </div>
             </div>
             <div class="form-group row">
-              <label for="max Temp" class="col-12 col-sm-4 col-md-6 col-lg-6 col-form-label">Max Temp:</label>
-              <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+              <label for="max Temp" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Max Temp:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <input type="text" readonly class="form-control-plaintext" id="maxTemp" value="">
               </div>
             </div>
             <div class="form-group row">
-              <label for="prox Min" class="col-12 col-sm-4 col-md-6 col-lg-6 col-form-label">Prox Min:</label>
-              <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+              <label for="prox Min" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Prox Min:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <input type="text" readonly class="form-control-plaintext" id="proxMin" value="">
               </div>
             </div>
             <div class="form-group row">
-              <label for="prox Max" class="col-12 col-sm-4 col-md-6 col-lg-6 col-form-label">Prox Max:</label>
-              <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+              <label for="prox Max" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Prox Max:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <input type="text" readonly class="form-control-plaintext" id="proxMax" value="">
               </div>
             </div>
             <div class="form-group row">
-              <label for="temp Unit" class="col-12 col-sm-4 col-md-6 col-lg-6 col-form-label">Temp Unit:</label>
-              <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+              <label for="temp Unit" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Temp Unit:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <input type="text" readonly class="form-control-plaintext" id="tempUnit" value="">
               </div>
             </div>
             <div class="form-group row">
-              <label for="deviceType" class="col-12 col-sm-4 col-md-6 col-lg-6 col-form-label">Dev Type:</label>
-              <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+              <label for="deviceType" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Dev Type:</label>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <input type="text" readonly class="form-control-plaintext" id="deviceType" value="">
               </div>
             </div>
