@@ -29,52 +29,45 @@ function checkLoginPassword() {
     }
 };
 
+// ---- WiFi Settings- Script --------- //
+
 window.onload = function(){
     var refButton = document.getElementById("buttonWifiSubmit");
 
-    refButton.onclick = async function() {
-        var ssID = document.getElementById("ssid").value;
-        var pass = document.getElementById("newPass").value;
-    
+    refButton.onclick = function() {
+        var ssID = "";
+        var pass = "";
+        ssID += document.getElementById("ssid").value;
+        pass += document.getElementById("newPass").value;
         url = URL_COMMON + "/wifi_setting.html";
-        data = {"ssid": ssID, "password": pass}
-        params = {
-            method:'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(data)
-        }
-        await fetch(url, {mode: "no-cors"}, params).then( response => response.json())
-        .then( data => {
-            const postResponse = data;
-            console.log(postResponse);
-            alert("Configuration Set Successfully. Rebooting Device");
-        })
-        .catch( err => {
-            alert('error: ' + err);
-            console.log('error: ' + err);
+        data = {"ssid": ssID, "password": pass};
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", url, true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify(data));
+        xhttp.onreadystatechange = processRequest;
+        // Define what happens on successful data submission
+        xhttp.addEventListener( 'load', function( event ) 
+        {
+            alert( 'Yeah! New SSID and Password set successfully.' );
         });
+
+        // Define what happens in case of error
+        xhttp.addEventListener(' error', function( event ) {
+        alert( 'Oops! Something went wrong.' );
+        } );
+
+        function processRequest(e) {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                let response = JSON.parse(xhttp.responseText);
+                document.getElementById("WifiSettingsHeaderID").innerHTML = response.result;
+                alert( 'Set SSID and Password Successfully.' );
+            }
+            else{
+               // alert("Error: Response\n");
+                document.getElementById("WifiSettingsHeaderID").innerHTML = response.result;
+            }
+        }
     }
 };
-
-// async function postsData() {
-//     url = "https://jsonplaceholder.typicode.com/posts";
-//     data = {"userId": 1121, "title": "sunt aut c facere", "body": "quia cc et"};
-//     params = {
-//         method: 'post',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     }
-//     await fetch(url, params).then(response => {
-//       return response.json();
-//     }).then( data  => {
-//         const postResponse = data;
-//         console.log(postResponse);
-//     }).catch(err => {
-//         console.log(err);
-//     });
-// }
-// postsData();
