@@ -2,59 +2,56 @@ var URL_COMMON = "";        //http://192.168.0.103:8888
 
 // ----- Factory Settings Post-Request -------- //
 
-function setpath() {
-    var default_path = document.getElementById("newfile").files[0].name;
-    document.getElementById("filepath").value = default_path;
-}
-function upload() {
-    var filePath = document.getElementById("filepath").value;
-    var upload_path = "/upload/" + filePath;
-    var fileInput = document.getElementById("newfile").files;
-    var Extension = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase(); 
+window.onload = function(){
+    var refButton = document.getElementById("buttonFactorySubmit");
+    refButton.onclick = function() {
+        var temp_Unit = "";
+        var minTemperature ="";
+        var maxTemperature = "";
+        var proximityMin ="";
+        var proximityMax = "";
+        var device_Type ="";
+        temp_Unit += document.getElementById("unit").value;
+        minTemperature += document.getElementById("tempMin").value;
+        maxTemperature += document.getElementById("tempMax").value;
+        proximityMin += document.getElementById("minProx").value;
+        proximityMax += document.getElementById("maxProx").value;
+        device_Type += document.getElementById("device_Type").value;
+    
+        url = URL_COMMON + "/factory_settings.html";
+        data =  {   "temp_unit": temp_Unit, "min_temp": minTemperature, "max_temp": maxTemperature, 
+                    "min_prox": proximityMin, "device_type": device_Type, "max_prox": proximityMax 
+                };
 
-    /* Max size of an individual file. Make sure this
-     * value is same as that set in file_server.c */
-    var MAX_FILE_SIZE = 200*1024;
-    var MAX_FILE_SIZE_STR = "200KB";
-
-    if (fileInput.length == 0) {
-        alert("No file selected!");
-    } else if (filePath.length == 0) {
-        alert("File path on server is not set!");
-    } else if (filePath.indexOf(' ') >= 0) {
-        alert("File path on server cannot have spaces!");
-    } else if (filePath[filePath.length-1] == '/') {
-        alert("File name not specified after path!");
-    } else if (fileInput[0].size > 1024*1024) {
-        alert("File size must be less than 200KB!");
-    } else if (Extension != "bin") {
-        alert("File extension must be .bin!");
-    } else {
-        document.getElementById("newfile").disabled = true;
-        document.getElementById("filepath").disabled = true;
-        document.getElementById("upload").disabled = true;
-
-        var file = fileInput[0];
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4) {
-                if (xhttp.status == 200) {
-                    document.open();
-                    document.write(xhttp.responseText);
-                    document.close();
-                } else if (xhttp.status == 0) {
-                    alert("Server closed the connection abruptly!");
-                    location.reload()
-                } else {
-                    alert(xhttp.status + " Error!\n" + xhttp.responseText);
-                    location.reload()
-                }
+        xhttp.open("POST", url, true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify(data));
+        xhttp.onreadystatechange = processRequest;
+        // Define what happens on successful data submission
+        xhttp.addEventListener( 'load', function( event ) 
+        {
+            alert( 'Yeah! Factory data set successfully.' );
+        });
+
+        // Define what happens in case of error
+        xhttp.addEventListener(' error', function( event ) {
+        alert( 'Oops! Something went wrong.' );
+        } );
+
+        function processRequest(e) {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                let response = JSON.parse(xhttp.responseText);
+                document.getElementById("factorySettingsH2Id").innerHTML = response.result;
             }
-        };
-        xhttp.open("POST", upload_path, true);
-        xhttp.send(file);
+            else{
+               // alert("Error: Response\n");
+                document.getElementById("factorySettingsH2Id").innerHTML = response.result;
+            }
+        }
+     
     }
-}
+};
 
 // ----- Login Script for Update -------- //
 

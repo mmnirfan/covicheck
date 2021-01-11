@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--- Script -->
-    <script src="main.js"></script>
+    <script src="/main.js"></script>
 
     <style>
         body {
@@ -89,7 +89,7 @@
         <div class="container-fluid">
           <div class="sidenav">
             <a><h5><strong>Covicheck Configurator</strong></h5></a>
-            <a href="index.html">Home</a>
+            <a href="/">Home</a>
             <a href="wifi_setting.html">WiFi Settings</a>
             <a href="factory_settings.html" data-toggle="modal" data-target="#myModal_2">Factory Settings</a>
             <a href="update.html" data-toggle="modal" data-target="#myModal">Update</a>
@@ -99,31 +99,31 @@
             <div class="card p-3">
               <form>
                 <div class="form-group row">
-                  <label for="macId" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">MAC Id =</label>
+                  <label for="macId" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">MAC Id:</label>
                   <div class="col-sm-8 col-7 col-md-6 col-lg-6">
                     <input type="text" readonly class="form-control-plaintext" id="macId" value="">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="ipAddress" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">IP Address =</label>
+                  <label for="ipAddress" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">IP Address:</label>
                   <div class="col-sm-8 col-7 col-md-6 col-lg-6">
                     <input type="text" readonly class="form-control-plaintext" id="ipAddress" value="">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="ssid" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">SSID =</label>
+                  <label for="ssid" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">SSID:</label>
                   <div class="col-sm-8 col-7 col-md-6 col-lg-6">
                     <input type="text" readonly class="form-control-plaintext" id="ssid" value="">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="tempUnit" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">Temp Unit =</label>
+                  <label for="tempUnit" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">Temp Unit:</label>
                   <div class="col-sm-8 col-7 col-md-6 col-lg-6">
                     <input type="text" readonly class="form-control-plaintext" id="tempUnit" value="">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="deviceType" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">MAC Id =</label>
+                  <label for="deviceType" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">MAC Id:</label>
                   <div class="col-sm-8 col-7 col-md-6 col-lg-6">
                     <input type="text" readonly class="form-control-plaintext" id="deviceType" value="">
                   </div>
@@ -149,11 +149,11 @@
                 <form action="update.html" method="GET" onSubmit="return checkLoginPass();">
                     <div class="form-group">
                       <label for="userId">User Id:</label>
-                      <input type="text" id="userId" class="form-control" placeholder="Enter Id">
+                      <input type="text" id="userId" class="form-control" placeholder="Enter Id" required>
                     </div>
                     <div class="form-group">
                       <label for="pwd">Password:</label>
-                      <input type="password" id="password" class="form-control" placeholder="Enter password">
+                      <input type="password" id="password" class="form-control" placeholder="Enter password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -184,11 +184,11 @@
                 <form action="factory_settings.html" method="GET" onSubmit="return checkLoginPassword();">
                     <div class="form-group">
                       <label for="userId">User Id:</label>
-                      <input type="text" id="user" class="form-control" placeholder="Enter Id">
+                      <input type="text" id="user" class="form-control" placeholder="Enter Id" required>
                     </div>
                     <div class="form-group">
                       <label for="pwd">Password:</label>
-                      <input type="password" id="pass" class="form-control" placeholder="Enter password">
+                      <input type="password" id="pass" class="form-control" placeholder="Enter password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

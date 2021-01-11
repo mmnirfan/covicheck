@@ -1,5 +1,5 @@
 var URL_COMMON = "";    //http://192.168.0.103:8888
-//import {URL_COMMON} from './url.js';
+
 // ---- Login for Update ------- ////
 
 function checkLoginPass() {
@@ -31,6 +31,8 @@ function checkLoginPassword() {
         return false;
     }
 };
+
+// ------ GET Current Config ------- //
 
 function getData(){
     url = URL_COMMON + "/current_config/";
