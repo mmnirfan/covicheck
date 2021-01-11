@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--- Script -->
-    <script src="factory.js"></script>
+    <script src="/factory.js"></script>
     <style>
       body {
         font-family: "Lato", sans-serif;
@@ -42,8 +42,9 @@
       }
       .card{box-sizing: border-box; box-shadow: 6px 6px rgb(235, 235, 235);}
       
-
-      
+      input {
+        font-weight: bold;
+      }      
       .main {
         margin-left: 160px; /* Same as the width of the sidenav */
         font-size: 28px; /* Increased text to enable scrolling */
@@ -109,11 +110,11 @@
       <div id="content">
         <h2 class="p-3 text-center">Factory Setting</h2>
         <div class="card p-3 mt-3 mb-5">
-          <form id="myForm">
+          <form id="FactorySettingsFormId">
               <div class="form-group">
                   <label for="Unit" class="col-12 col-sm-6 col-md-12 col-lg-12">Temp. Unit :</label>
                   <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                      <select class="form-control" id="unit">
+                      <select class="form-control" id="unit" required>
                           <option value disabled selected hidden>Select Temp Unit</option>
                           <option>C</option>
                           <option>F</option>
@@ -123,33 +124,33 @@
               <div class="form-group">
                   <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Min Temp :</label>
                   <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="tempMin" placeholder="Min Temperature">
+                    <input type="text" class="form-control" id="tempMin" placeholder="Min Temperature" required>
                   </div>
               </div>
               <div class="form-group">
                   <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Max Temp :</label>
                   <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="tempMax" placeholder="Max Temperature">
+                    <input type="text" class="form-control" id="tempMax" placeholder="Max Temperature" required>
                   </div>
               </div>
               <div class="form-group">
                   <label for="proximityMin" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Min :</label>
                   <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="minProx" placeholder="Proximity Min">
+                    <input type="text" class="form-control" id="minProx" placeholder="Proximity Min" required>
                     <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMin();">Get Proximity</button>
                   </div>
               </div>
               <div class="form-group">
                   <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Max :</label>
                   <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="maxProx" placeholder="Proximity Max">
+                    <input type="text" class="form-control" id="maxProx" placeholder="Proximity Max" required>
                     <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMax();">Get Proximity</button>
                   </div>
               </div>
               <div class="form-group">
                   <label for="deviceType" class="col-12 col-sm-6 col-md-12 col-lg-12">Device Type :</label>
                   <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                      <select class="form-control" id="device_Type">
+                      <select class="form-control" id="device_Type" required>
                           <option value disabled selected hidden>Select Device Type</option>
                           <option value="0">Proximity Device</option>
                           <option value="1">Wi-Fi and QR Stickerits</option>
@@ -158,7 +159,7 @@
                       </select>
                   </div>
               </div>
-              <button type="submit" class="btn btn-success mt-3" onclick="update()">Submit</button>
+              <button type="submit" class="btn btn-success mt-3" id="buttonFactorySubmit">Submit</button>
           </form>
         </div>
         <div class="card p-3 mt-2 mb-5" id="current_config">
@@ -218,7 +219,7 @@
             
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="update.html" method="POST" onSubmit="return checkLoginPass();">
+                <form action="update.html" method="GET" onSubmit="return checkLoginPass();">
                     <div class="form-group">
                       <label for="userId">User Id:</label>
                       <input type="text" id="userId" class="form-control" placeholder="Enter Id">

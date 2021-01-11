@@ -1,54 +1,60 @@
-//import URL_COMMON from './url';
 var URL_COMMON = "";        //http://192.168.0.103:8888
-/// ---- Update Factory Settings --------/////
-// var unit = document.getElementById("unit").value;
-// var minTemp = document.getElementById("minTemp").value;
-// var maxTemp = document.getElementById("maxTemp").value;
-// var proxMin = document.getElementById("proxMin").value;
-// var proxMax = document.getElementById("proxMax").value;
-// var deviceType = document.getElementById("deviceType").value;
 
+// ----- Factory Settings Post-Request -------- //
 
-//var URL_COMMON = "" 
-window.onload = function(){
-    var refButton = document.getElementById("buttonFactorySubmit");
-    var temp_Unit = "";
-    var minTemperature ="";
-    var maxTemperature = "";
-    var proximityMin ="";
-    var proximityMax = "";
-    var device_Type ="";
+function setpath() {
+    var default_path = document.getElementById("newfile").files[0].name;
+    document.getElementById("filepath").value = default_path;
+}
+function upload() {
+    var filePath = document.getElementById("filepath").value;
+    var upload_path = "/upload/" + filePath;
+    var fileInput = document.getElementById("newfile").files;
+    var Extension = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase(); 
 
-    refButton.onclick = async function() {
-        temp_Unit += document.getElementById("unit").value;
-        minTemperature += document.getElementById("tempMin").value;
-        maxTemperature += document.getElementById("tempMax").value;
-        proximityMin += document.getElementById("minProx").value;
-        proximityMax += document.getElementById("maxProx").value;
-        device_Type += document.getElementById("device_Type").value;
-    
-        url = URL_COMMON + "/factory_settings.html";
-        data = {"temp_unit": temp_Unit, "min_temp": minTemperature, "max_temp": maxTemperature, "min_prox": proximityMin, "device_type": device_Type, "max_prox": proximityMax};
-        params = {
-            method:'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(data)
-        }
-        alert(url);
-        await fetch(url, {mode:"no-cors"}, params).then( response => response.json())
-        .then( data => {
-            const postResponse = data;
-            console.log(postResponse);
-            alert("Configuration Set Successfully. Rebooting Device");
-        })
-        .catch( err => {
-            alert('error: ' + err);
-            console.log('error: ' + err);
-        });
+    /* Max size of an individual file. Make sure this
+     * value is same as that set in file_server.c */
+    var MAX_FILE_SIZE = 200*1024;
+    var MAX_FILE_SIZE_STR = "200KB";
+
+    if (fileInput.length == 0) {
+        alert("No file selected!");
+    } else if (filePath.length == 0) {
+        alert("File path on server is not set!");
+    } else if (filePath.indexOf(' ') >= 0) {
+        alert("File path on server cannot have spaces!");
+    } else if (filePath[filePath.length-1] == '/') {
+        alert("File name not specified after path!");
+    } else if (fileInput[0].size > 1024*1024) {
+        alert("File size must be less than 200KB!");
+    } else if (Extension != "bin") {
+        alert("File extension must be .bin!");
+    } else {
+        document.getElementById("newfile").disabled = true;
+        document.getElementById("filepath").disabled = true;
+        document.getElementById("upload").disabled = true;
+
+        var file = fileInput[0];
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4) {
+                if (xhttp.status == 200) {
+                    document.open();
+                    document.write(xhttp.responseText);
+                    document.close();
+                } else if (xhttp.status == 0) {
+                    alert("Server closed the connection abruptly!");
+                    location.reload()
+                } else {
+                    alert(xhttp.status + " Error!\n" + xhttp.responseText);
+                    location.reload()
+                }
+            }
+        };
+        xhttp.open("POST", upload_path, true);
+        xhttp.send(file);
     }
-};
+}
 
 // ----- Login Script for Update -------- //
 
@@ -65,10 +71,11 @@ function checkLoginPass() {
         return false;
     }
 };
-
-
 // --- validation End ---- ////
 
+
+
+// ------  Get Current Config ------ //////
 function getData(){
     url = URL_COMMON + "/current_config/";
     fetch(url).then( response => response.json())
@@ -106,32 +113,6 @@ function appendData(data) {
     $(deviceType).append(deviceType.value); 
 }
 appendData();
-
-
-// function appendData(data) {
-//     var tableData = document.getElementById('table-body');
-//     var htmlstring = "<tr><td>" + data.min_temp + "</td><td>" + data.max_temp +
-//                      "</td><td>" + data.min_prox + "</td><td>" + data.max_prox + 
-//                      "</td><td>" + data.temp_unit + "</td><td>" + data.device_type + "</td></tr>";
-//     $(tableData).append(htmlstring); 
-// }
-// appendData();
-
-// var proximity = ""
-
-// function getProx(){
-//     url = "https://api.github.com/users";
-//     fetch(url).then((response)=>{
-//         return response.json();
-//     }).then((data)=>{
-//         console.log(data);
-//         proximity += data[0]
-//     })
-//     .catch(function (err) {
-//         console.log('error: ' + err);
-//     })
-
-// }
 
 function getProximityMin(){
     url = "https://api.github.com/users";
