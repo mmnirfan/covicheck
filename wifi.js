@@ -71,3 +71,33 @@ window.onload = function(){
         }
     }
 };
+
+
+// ------ Get Current Config -----///
+
+function getData(){
+    url = URL_COMMON + "/current_config/";
+	console.log(url);
+    fetch(url).then( response => response.json())
+    .then( data => {
+        console.log(data);
+        appendData(data);
+    })
+    .catch( err => {
+        console.log("error: " + err);
+    });
+
+}
+
+getData();
+
+function appendData(data) {
+    var password = document.getElementById('password');
+    var ssid = document.getElementById('ssid');
+    password.value += data.password;
+    ssid.value += data.ssid;
+
+    $(password).append(password.value);
+    $(ssid).append(ssid.value);
+}
+appendData();

@@ -41,7 +41,9 @@
         color: green;
       }
       #content{margin-left: 250px;}
-
+      input {
+          font-weight: bold;
+      }
       
       .main {
         margin-left: 160px; /* Same as the width of the sidenav */
@@ -107,6 +109,23 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-success mt-3" id="buttonWifiSubmit">Submit</button>
+            </form>
+          </div>
+          <div class="card p-3 mt-2 mb-5" id="current_config">
+            <h4 class="p-3 text-center">Current-Config</h4>
+            <form>
+              <div class="form-group row">
+                <label for="ssid" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">SSID:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <input type="text" readonly class="form-control-plaintext" id="ssid" value="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="password" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Password:</label>
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                  <input type="text" readonly class="form-control-plaintext" id="password" value="">
+                </div>
+              </div>
             </form>
           </div>
         </div>
