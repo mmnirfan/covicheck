@@ -40,8 +40,8 @@
       .sidenav a strong:hover {
         color: green;
       }
-      .card{box-sizing: border-box; box-shadow: 6px 6px rgb(235, 235, 235); width: 350px;}
-      #content{margin-left: 180px; }
+      .card{box-sizing: border-box; box-shadow: 6px 6px rgb(235, 235, 235);}
+      
 
       
       .main {
@@ -49,12 +49,27 @@
         font-size: 28px; /* Increased text to enable scrolling */
         padding: 0px 10px;
       }
+      @media screen and (min-width: 1027px){
+          strong {font-size: 0.9em;}
+          .sidenav a {font-size: 18px;}
+          .sidenav {width: 163px;}
+          h2 {font-size: 1.4em;}
+          #content{margin-left: 180px;}
+          #current_config{position: absolute; top: 65px; right: 30px;}
+          .card{width: 350px;}
+        }
+      @media screen and (min-width: 970px) and (max-width:1028px) {
+
+        #current_config{position: absolute; top: 65px; right: 30px;}
+        .card{width: 350px;}
+      }
       @media screen and (min-width: 768px) and (max-width:1028px) {
         strong {font-size: 0.9em;}
         .sidenav a {font-size: 18px;}
         .sidenav {width: 163px;}
         h2 {font-size: 1.4em;}
-        /* #content{margin-right: 0;} */
+        #content{margin-left: 180px;}
+        .card{width: 350px;}
       }
       @media screen and (min-width: 480px) and (max-width:767px) {
         strong {font-size: 0.8em; float: left;}
@@ -144,7 +159,7 @@
               <button type="submit" class="btn btn-success mt-3" onclick="update()">Submit</button>
           </form>
         </div>
-        <div class="card p-3 mt-2 mb-5">
+        <div class="card p-3 mt-2 mb-5" id="current_config">
           <h2 class="p-3 text-center">Current-Config</h2>
           <form>
             <div class="form-group row">
