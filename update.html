@@ -37,9 +37,10 @@
       .sidenav a:hover {
         color: orange;
       }
-      .sidenav a h4:hover {
+      .sidenav a strong:hover {
         color: green;
       }
+      #content{margin-left: 250px;}
 
       
       .main {
@@ -52,71 +53,72 @@
         .sidenav a {font-size: 18px;}
         .sidenav {width: 163px;}
         h2 {font-size: 1.4em;}
+        #content{margin-right: 0;}
       }
       @media screen and (min-width: 480px) and (max-width:767px) {
-        strong {font-size: 0.8em;}
-        .sidenav a {font-size: 16px;}
-        .sidenav {width: 146px;}
+        strong {font-size: 0.8em; float: left;}
+        .sidenav a {font-size: 16px; float: left;}
+        .sidenav {width: 100%; height: auto; position: relative;}
         h2 {font-size: 1.3em;}
+        #content{margin-left: 0;}
       }
 
       @media screen and (min-width: 320px) and (max-width:479px) {
-        strong {font-size: 0.7em;}
-        .sidenav a {font-size: 14px;}
-        .sidenav {width: 129px;}
+        strong {font-size: 0.7em; float: none; top: 0; text-align: center;}
+        .sidenav a {font-size: 14px; float: none; text-align: center;}
+        .sidenav {width: 100%; height: auto; position: relative;}
         h2 {font-size: 1.2em;}
+        #content{margin-left: 0;}
       }
 
       @media screen and (max-width: 320px) {
-        strong {font-size: 0.6em;}
-        .sidenav a {font-size: 12px;}
-        .sidenav {width: 112px;}
+        strong {font-size: 0.6em; float: none; text-align: center;}
+        .sidenav a {font-size: 12px; float: none; text-align: center;}
+        .sidenav {width: 100%; height: auto; position: relative;}
         h2 {font-size: 1.1em;}
+        #content{margin-left: 0;}
       }
-    </style>
+  </style>
 </head>
 <body>
-    <section>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-3 col-sm-3 col-md-3 col-lg-3">
-                    <div class="sidenav">
-                        <a><h4><strong>Covicheck Configurator</strong></h4></a>
-                        <a href="index.html">Home</a>
-                        <a href="wifi_setting.html">WiFi Settings</a>
-                        <a href="factory_settings.html">Factory Settings</a>
-                        <a href="update.html">Update</a>
-                    </div>
-                </div>
-                <div class="col-9 col-sm-9 col-md-9 col-lg-9">
-                    <h2 class="p-3 text-center">Covicheck Firmware Update</h2>
-                    <div class="card p-3">
-                        <table border="0">
-                            <tr>
-                                <td>
-                                    <label for="newfile">Upload a file :</label>
-                                </td>
-                                <td colspan="2">
-                                    <input id="newfile" type="file" onchange="setpath()" style="width:100%;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="filepath">Set path on server :</label>
-                                </td>
-                                <td>
-                                    <input id="filepath" type="text" class="form-control" style="width:100%;">
-                                </td>
-                                <td>
-                                    <button id="upload" type="button" class="btn btn-success" onclick="upload()">Upload</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section>
+    <div class="container-fluid">
+      <div class="sidenav">
+        <a><h4><strong>Covicheck Configurator</strong></h4></a>
+        <a href="index.html">Home</a>
+        <a href="wifi_setting.html">WiFi Settings</a>
+        <a href="factory_settings.html" data-toggle="modal" data-target="#myModal_2">Factory Settings</a>
+        <a href="update.html">Update</a>
+      </div>
+      <div id="content">
+        <h2 class="p-3 text-center">Covicheck Firmware Update</h2>
+        <div class="card p-3">
+          <table border="0">
+              <tr>
+                  <td>
+                      <label for="newfile">Upload a file :</label>
+                  </td>
+                  <td colspan="2">
+                      <input id="newfile" type="file" onchange="setpath()" style="width:100%;">
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <label for="filepath">Set path on server :</label>
+                  </td>
+                  <td>
+                      <input id="filepath" type="text" class="form-control" style="width:100%;">
+                  </td>
+                  <td>
+                      <button id="upload" type="button" class="btn btn-success" onclick="upload()">Upload</button>
+                  </td>
+              </tr>
+          </table>
+        </div>           
+      </div>
+            
+    </div>
+  </section>
     <!-- The Modal -->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog modal-sm">
