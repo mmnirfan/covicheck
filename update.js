@@ -1,19 +1,4 @@
-
-// ----- factory-settings-script------//
-function checkLoginPassword() {
-    var login = document.getElementById("user").value;
-    var pass = document.getElementById("pass").value;
-    if (login === "admin" && pass === "covicheck@123") {
-        //window.open("index.html")
-        return true;
-    }
-    else {
-        alert("Wrong Email or Password !");
-        console.log('wrong user id or password!');
-        return false;
-    }
-};
-
+///  ----- Upload -----  ///
 function setpath() {
     var default_path = document.getElementById("newfile").files[0].name;
     document.getElementById("filepath").value = default_path;
@@ -67,3 +52,4 @@ function upload() {
         xhttp.send(file);
     }
 }
+/// ------ End -------- ///

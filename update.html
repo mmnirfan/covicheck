@@ -9,7 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--- Script -->
-    <script src="update.js"></script>
+    <script src="/update.js"></script>
+    <script src="/url.js"></script>
     <style>
       body {
         font-family: "Lato", sans-serif;
@@ -33,7 +34,7 @@
         color: #000000;
         display: block;
       }
-      
+      h6 {font-weight: 700;}
       .sidenav a:hover {
         color: orange;
       }
@@ -52,14 +53,12 @@
         strong {font-size: 0.9em;}
         .sidenav a {font-size: 18px;}
         .sidenav {width: 163px;}
-        h2 {font-size: 1.4em;}
         #content{margin-right: 0;}
       }
       @media screen and (min-width: 480px) and (max-width:767px) {
         strong {font-size: 0.8em; float: left;}
         .sidenav a {font-size: 16px; float: left;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h2 {font-size: 1.3em;}
         #content{margin-left: 0;}
       }
 
@@ -67,7 +66,7 @@
         strong {font-size: 0.7em; float: none; top: 0; text-align: center;}
         .sidenav a {font-size: 14px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h2 {font-size: 1.2em;}
+        h6 {font-size: 0.8em;}
         #content{margin-left: 0;}
       }
 
@@ -75,7 +74,7 @@
         strong {font-size: 0.6em; float: none; text-align: center;}
         .sidenav a {font-size: 12px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h2 {font-size: 1.1em;}
+        h6 {font-size: 0.8em;}
         #content{margin-left: 0;}
       }
   </style>
@@ -84,15 +83,15 @@
   <section>
     <div class="container-fluid">
       <div class="sidenav">
-        <a><h4><strong>Covicheck Configurator</strong></h4></a>
+        <a><h5><strong>Covicheck Configurator</strong></h5></a>
         <a href="/">Home</a>
         <a href="wifi_setting.html">WiFi Settings</a>
         <a href="factory_settings.html" data-toggle="modal" data-target="#myModal_2">Factory Settings</a>
-        <a href="update.html">Update</a>
+        <a href="update.html" style="color: orange;">Update</a>
       </div>
       <div id="content">
-        <h2 class="p-3 text-center">Covicheck Firmware Update</h2>
-        <div class="card p-3">
+        <h6 class="mt-3 text-center">Covicheck Firmware Update</h6>
+        <div class="card p-3 mt-3">
           <table border="0">
               <tr>
                   <td>
@@ -133,7 +132,7 @@
             
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="factory_settings.html" method="GET" onSubmit="return checkLoginPassword();">
+                <form action="factory_settings.html" method="POST" onSubmit="return checkLoginPassword();">
                     <div class="form-group">
                       <label for="userId">User Id:</label>
                       <input type="text" id="user" class="form-control" placeholder="Enter email" required>

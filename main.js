@@ -1,39 +1,28 @@
 var URL_COMMON = "";    //http://192.168.0.103:8888
 
-// ---- Login for Update ------- ////
 
-function checkLoginPass() {
-    var login = document.getElementById("userId").value;
-    var pass = document.getElementById("password").value;
-    if (login === "admin" && pass === "covicheck@123") {
-        //window.open("index.html")
-        return true;
-    }
-    else {
-        alert("ID or Password !");
-        console.log('wrong user id or password!');
-        return false;
-    }
-};
+/// ----- GET Object-Temperature ----- ///
+function fetchObjectTemp(){
+    document.getElementById("object_temp_button").disabled = true;
+    url = URL_COMMON + "/object_temperature/";
+    var objectTemperature = document.getElementById('object_temp_input');
+    fetch(url).then((response)=>{
+        return response.json();
+    }).then((data)=>{
+        console.log(data.object_temperature);
+        objectTemperature.value = "";
+        objectTemperature.value = data.object_temperature;
+        document.getElementById("object_temp_button").disabled = false;
+    })
+    .catch(function (err) {
+        console.log('error: ' + err);
+    })
+    document.getElementById("object_temp_button").disabled = false;
+}
 
-// ----- Login Script for Factory Settings -------- //
-
-function checkLoginPassword() {
-    var login = document.getElementById("user").value;
-    var pass = document.getElementById("pass").value;
-    if (login === "admin" && pass === "covicheck@123") {
-        //window.open("index.html")
-        return true;
-    }
-    else {
-        alert("Wrong Email or Password !");
-        console.log('wrong user id or password!');
-        return false;
-    }
-};
+/// ---- End..... ------//
 
 // ------ GET Current Config ------- //
-
 function getData(){
     url = URL_COMMON + "/current_config/";
 	console.log(url);
@@ -43,11 +32,10 @@ function getData(){
         appendData(data);
     })
     .catch( err => {
-        console.log("error: " + err);
+        console.log("error: ", err);
     });
 
 }
-
 getData();
 
 function appendData(data) {
@@ -69,3 +57,4 @@ function appendData(data) {
     $(deviceType).append(deviceType.value); 
 }
 appendData();
+/// ---- End ------//

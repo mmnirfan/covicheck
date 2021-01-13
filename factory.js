@@ -1,7 +1,5 @@
 var URL_COMMON = "";        //http://192.168.0.103:8888
-
-// ----- Factory Settings Post-Request -------- //
-
+//var URL_COMMON = "" ;
 window.onload = function(){
     var refButton = document.getElementById("buttonFactorySubmit");
     refButton.onclick = function() {
@@ -53,22 +51,7 @@ window.onload = function(){
     }
 };
 
-// ----- Login Script for Update -------- //
-
-function checkLoginPass() {
-    var login = document.getElementById("userId").value;
-    var pass = document.getElementById("password").value;
-    if (login === "admin" && pass === "covicheck@123") {
-        //window.open("index.html")
-        return true;
-    }
-    else {
-        alert("Wrong Email or Password !");
-        console.log('wrong user id or password!');
-        return false;
-    }
-};
-// --- validation End ---- ////
+/// ---- End ------ ///
 
 
 
@@ -110,6 +93,9 @@ function appendData(data) {
     $(deviceType).append(deviceType.value); 
 }
 appendData();
+/// ------ End ------ ///
+
+/// ---- GET Proximity ---- ///
 
 function getProximityMin(){
     url = "/object_proximity/";
@@ -126,6 +112,7 @@ function getProximityMin(){
     })
 
 }
+
 function getProximityMax(){
     url = "/object_proximity/";
     var proxMax = document.getElementById('maxProx');
@@ -141,3 +128,29 @@ function getProximityMax(){
     })
 
 }
+/// ---- End ----- ///
+
+/// ---- Device Reboot ------ ///
+function deviceReboot(){
+    url = URL_COMMON + "/reboot/";
+
+    var confirming = confirm("Reboot Device!! Are you sure?");
+    if (confirming == true) {
+        
+        fetch(url).then( response => response.json())
+        .then( data => {
+            alert('Your Device is Rebooting....');
+            window.open('/');
+        })
+        .catch( err => {
+            console.log("error: ", err);
+        });
+        
+        
+    } 
+    else if (confirming == false){
+        return false;
+    }
+
+}
+/// --------- End --------- ///

@@ -1,33 +1,5 @@
 var URL_COMMON = "";
-// ------ Login script for Update ----- ///
-function checkLoginPass() {
-    var login = document.getElementById("userId").value;
-    var pass = document.getElementById("password").value;
-    if (login === "admin" && pass === "covicheck@123") {
-        //window.open("index.html")
-        return true;
-    }
-    else {
-        alert("Wrong Email or Password !");
-        console.log('wrong user id or password!');
-        return false;
-    }
-};
 
-// ------ Login script for Factory settings ----- ///
-function checkLoginPassword() {
-    var login = document.getElementById("user").value;
-    var pass = document.getElementById("pass").value;
-    if (login === "admin" && pass === "covicheck@123") {
-        //window.open("index.html")
-        return true;
-    }
-    else {
-        alert("Wrong Email or Password !");
-        console.log('wrong user id or password!');
-        return false;
-    }
-};
 
 // ---- WiFi Settings- Script --------- //
 
@@ -47,12 +19,12 @@ window.onload = function(){
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send(JSON.stringify(data));
         xhttp.onreadystatechange = processRequest;
-        // Define what happens on successful data submission
+        /* // Define what happens on successful data submission
         xhttp.addEventListener( 'load', function( event ) 
         {
             alert( 'Yeah! New SSID and Password set successfully.' );
         });
-
+         */
         // Define what happens in case of error
         xhttp.addEventListener(' error', function( event ) {
         alert( 'Oops! Something went wrong.' );
@@ -93,11 +65,43 @@ getData();
 
 function appendData(data) {
     var password = document.getElementById('password');
+    var newPass = document.getElementById('newPass');
     var ssid = document.getElementById('ssid');
+    var ssid_below = document.getElementById('ssid_below');
+    
     password.value += data.password;
+    newPass.value += data.password;
     ssid.value += data.ssid;
+    ssid_below.value += data.ssid;
 
     $(password).append(password.value);
+    $(newPass).append(password.value);
     $(ssid).append(ssid.value);
+    $(ssid_below).append(ssid.value);
 }
 appendData();
+
+
+/// ---- Device Reboot ------ ///
+function deviceReboot(){
+    url = URL_COMMON + "/reboot/";
+
+    var confirming = confirm("Do you want to Reboot Device ?");
+    if (confirming == true) {
+        
+        fetch(url).then( response => response.json())
+        .then( data => {
+            alert('Your Device is Rebooting....');
+            window.open('/');
+        })
+        .catch( err => {
+            console.log("error: ", err);
+        });
+
+        
+    } 
+    else if (confirming == false){
+        return false;
+    }
+
+}

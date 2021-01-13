@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--- Script -->
     <script src="/factory.js"></script>
+    <script src="/url.js"></script>
     <style>
       body {
         font-family: "Lato", sans-serif;
@@ -37,38 +38,40 @@
       .sidenav a:hover {
         color: orange;
       }
+      .sidenav a:active {
+        color: orange;
+      }
       .sidenav a strong:hover {
         color: green;
       }
-      .card{box-sizing: border-box; box-shadow: 6px 6px rgb(235, 235, 235);}
+      .card{box-sizing: border-box; box-shadow: 3px 3px rgb(235, 235, 235);}
       
       input {
         font-weight: bold;
-      }      
+      } 
+      h3{font-weight: 700;}     
       .main {
         margin-left: 160px; /* Same as the width of the sidenav */
         font-size: 28px; /* Increased text to enable scrolling */
         padding: 0px 10px;
       }
-      @media screen and (min-width: 1027px){
+      @media screen and (max-width: 1900px){
           strong {font-size: 0.9em;}
           .sidenav a {font-size: 18px;}
           .sidenav {width: 163px;}
-          h2 {font-size: 1.4em;}
+          h3 {font-size: 1.4em;}
           #content{margin-left: 180px;}
-          #current_config{position: absolute; top: 65px; right: 100px;}
-          .card{width: 350px;}
+          .card{width: 450px;}
         }
-      @media screen and (min-width: 1030px) and (max-width:1028px) {
 
-        #current_config{position: absolute; top: 65px; right: 100px;}
-        .card{width: 350px;}
+      @media screen and (min-width:1028px) and (max-width:1125px) {
+        .card{width: 400px;}
       }
       @media screen and (min-width: 768px) and (max-width:1028px) {
         strong {font-size: 0.9em;}
         .sidenav a {font-size: 18px;}
         .sidenav {width: 163px;}
-        h2 {font-size: 1.4em;}
+        h3 {font-size: 1.4em;}
         #content{margin-left: 180px;}
         .card{width: 350px;}
       }
@@ -76,7 +79,7 @@
         strong {font-size: 0.8em; float: left;}
         .sidenav a {font-size: 16px; float: left;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h2 {font-size: 1.3em;}
+        h3 {font-size: 1.3em;}
         #content{margin-left: 0;}
       }
 
@@ -84,16 +87,20 @@
         strong {font-size: 0.7em; float: none; top: 0; text-align: center;}
         .sidenav a {font-size: 14px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h2 {font-size: 1.2em;}
+        h3 {font-size: 1.2em;}
         #content{margin-left: 0;}
+      }
+      @media screen and (min-width: 321px) and (max-width:500px) {
+        .card{width: auto;}
       }
 
       @media screen and (max-width: 320px) {
         strong {font-size: 0.6em; float: none; text-align: center;}
         .sidenav a {font-size: 12px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h2 {font-size: 1.1em;}
+        h3 {font-size: 1.1em;}
         #content{margin-left: 0;}
+        .card{width: auto;}
       }
     </style>
 </head>
@@ -104,105 +111,116 @@
         <a><h4><strong>Covicheck Configurator</strong></h4></a>
         <a href="/">Home</a>
         <a href="wifi_setting.html">WiFi Settings</a>
-        <a href="factory_settings.html">Factory Settings</a>
+        <a href="factory_settings.html" style="color: orange;">Factory Settings</a>
         <a href="update.html" data-toggle="modal" data-target="#myModal">Update</a>
       </div>
       <div id="content">
-        <h2 class="p-3 text-center">Factory Setting</h2>
-        <div class="card p-3 mt-3 mb-5">
-          <form id="FactorySettingsFormId">
-              <div class="form-group">
-                  <label for="Unit" class="col-12 col-sm-6 col-md-12 col-lg-12">Temp. Unit :</label>
-                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                      <select class="form-control" id="unit" required>
-                          <option value disabled selected hidden>Select Temp Unit</option>
-                          <option>C</option>
-                          <option>F</option>
-                      </select>
+        <div class="row">
+          <div class="col-12 col-lg-6 col-xl-6">
+            <div class="card p-3 mt-5">
+              <h3 class="p-3 text-center">Factory Setting</h3>
+              <form id="FactorySettingsFormId">
+                  <div class="form-group">
+                      <label for="Unit" class="col-12 col-sm-6 col-md-12 col-lg-12">Temp. Unit :</label>
+                      <div class="col-12 col-sm-6 col-md-12 col-lg-12">
+                          <select class="form-control" id="unit" required>
+                              <option value disabled selected hidden>Select Temp Unit</option>
+                              <option>C</option>
+                              <option>F</option>
+                          </select>
+                      </div>
                   </div>
-              </div>
-              <div class="form-group">
-                  <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Min Temp :</label>
-                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="tempMin" placeholder="Min Temperature" required>
+                  <div class="form-group">
+                      <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Min Temp :</label>
+                      <div class="col-12 col-sm-6 col-md-12 col-lg-12">
+                        <input type="text" class="form-control" id="tempMin" placeholder="Min Temperature" required>
+                      </div>
                   </div>
-              </div>
-              <div class="form-group">
-                  <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Max Temp :</label>
-                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="tempMax" placeholder="Max Temperature" required>
+                  <div class="form-group">
+                      <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Max Temp :</label>
+                      <div class="col-12 col-sm-6 col-md-12 col-lg-12">
+                        <input type="text" class="form-control" id="tempMax" placeholder="Max Temperature" required>
+                      </div>
                   </div>
-              </div>
-              <div class="form-group">
-                  <label for="proximityMin" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Min :</label>
-                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="minProx" placeholder="Proximity Min" required>
-                    <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMin();">Get Proximity</button>
+                  <div class="form-group">
+                      <label for="proximityMin" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Min :</label>
+                      <div class="col-12 col-sm-6 col-md-12 col-lg-12">
+                        <input type="text" class="form-control" id="minProx" placeholder="Proximity Min" required>
+                        <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMin();">Get Proximity</button>
+                      </div>
                   </div>
-              </div>
-              <div class="form-group">
-                  <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Max :</label>
-                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                    <input type="text" class="form-control" id="maxProx" placeholder="Proximity Max" required>
-                    <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMax();">Get Proximity</button>
+                  <div class="form-group">
+                      <label for="proximityMax" class="col-12 col-sm-6 col-md-12 col-lg-12">Proximity Max :</label>
+                      <div class="col-12 col-sm-6 col-md-12 col-lg-12">
+                        <input type="text" class="form-control" id="maxProx" placeholder="Proximity Max" required>
+                        <button type="button" style="float: left; margin: 8px 0 8px 0;" class="btn btn-success" onclick="getProximityMax();">Get Proximity</button>
+                      </div>
                   </div>
-              </div>
-              <div class="form-group">
-                  <label for="deviceType" class="col-12 col-sm-6 col-md-12 col-lg-12">Device Type :</label>
-                  <div class="col-12 col-sm-6 col-md-12 col-lg-12">
-                      <select class="form-control" id="device_Type" required>
-                          <option value disabled selected hidden>Select Device Type</option>
-                          <option value="0">Proximity Device</option>
-                          <option value="1">Wi-Fi and QR Stickerits</option>
-                          <option value="2">QR Reader</option>
-                          <option value="3">RFID Deviceits</option>
-                      </select>
+                  <div class="form-group">
+                      <label for="deviceType" class="col-12 col-sm-6 col-md-12 col-lg-12">Device Type :</label>
+                      <div class="col-12 col-sm-6 col-md-12 col-lg-12">
+                          <select class="form-control" id="device_Type" required>
+                              <option value disabled selected hidden>Select Device Type</option>
+                              <option value="0">Proximity Device</option>
+                              <option value="1">Wi-Fi and QR Stickerits</option>
+                              <option value="2">QR Reader</option>
+                              <option value="3">RFID Deviceits</option>
+                          </select>
+                      </div>
                   </div>
-              </div>
-              <button type="submit" class="btn btn-success mt-3" id="buttonFactorySubmit">Submit</button>
-          </form>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success mt-3 ml-3" id="buttonFactorySubmit">Submit</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 col-xl-6">
+            <div class="card p-3 mt-5" id="current_config">
+              <h3 class="p-3 text-center">Current-Config</h3>
+              <form>
+                <div class="form-group row">
+                  <label for="min Temp" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Min Temp:</label>
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" readonly class="form-control-plaintext" id="minTemp" value="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="max Temp" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Max Temp:</label>
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" readonly class="form-control-plaintext" id="maxTemp" value="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="prox Min" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Prox Min:</label>
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" readonly class="form-control-plaintext" id="proxMin" value="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="prox Max" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Prox Max:</label>
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" readonly class="form-control-plaintext" id="proxMax" value="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="temp Unit" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Temp Unit:</label>
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" readonly class="form-control-plaintext" id="tempUnit" value="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="deviceType" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Dev Type:</label>
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" readonly class="form-control-plaintext" id="deviceType" value="">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <button type="button" class="btn btn-success mt-5 mb-5" onclick="deviceReboot();">Reboot Device</button>
+          </div>
         </div>
-        <div class="card p-3 mt-2 mb-5" id="current_config">
-          <h2 class="p-3 text-center">Current-Config</h2>
-          <form>
-            <div class="form-group row">
-              <label for="min Temp" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Min Temp:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <input type="text" readonly class="form-control-plaintext" id="minTemp" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="max Temp" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Max Temp:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <input type="text" readonly class="form-control-plaintext" id="maxTemp" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="prox Min" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Prox Min:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <input type="text" readonly class="form-control-plaintext" id="proxMin" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="prox Max" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Prox Max:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <input type="text" readonly class="form-control-plaintext" id="proxMax" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="temp Unit" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Temp Unit:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <input type="text" readonly class="form-control-plaintext" id="tempUnit" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="deviceType" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Dev Type:</label>
-              <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-                <input type="text" readonly class="form-control-plaintext" id="deviceType" value="">
-              </div>
-            </div>
-          </form>
-        </div>
+        
+        
       </div>
     </div>
   </section>
@@ -219,14 +237,14 @@
             
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="update.html" method="GET" onSubmit="return checkLoginPass();">
+                <form action="update.html" method="POST" onSubmit="return checkLoginPass();">
                     <div class="form-group">
                       <label for="userId">User Id:</label>
-                      <input type="text" id="userId" class="form-control" placeholder="Enter Id" required>
+                      <input type="text" id="userid" class="form-control" placeholder="Enter Id" required>
                     </div>
                     <div class="form-group">
-                      <label for="pwd">Password:</label>
-                      <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+                      <label for="password">Password:</label>
+                      <input type="password" id="pwd" class="form-control" placeholder="Enter password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
