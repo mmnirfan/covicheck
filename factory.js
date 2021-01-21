@@ -27,14 +27,14 @@ window.onload = function(){
         xhttp.send(JSON.stringify(data));
         xhttp.onreadystatechange = processRequest;
         // Define what happens on successful data submission
-        xhttp.addEventListener( 'load', function( event ) 
-        {
-            alert( 'Yeah! Factory data set successfully.' );
-        });
+        // xhttp.addEventListener( 'load', function( event ) 
+        // {
+        //     alert( 'Yeah! Factory data set successfully.' );
+        // });
 
         // Define what happens in case of error
         xhttp.addEventListener(' error', function( event ) {
-        alert( 'Oops! Something went wrong.' );
+            alert( 'Oops! Something went wrong.' );
         } );
 
         function processRequest(e) {

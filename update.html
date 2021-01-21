@@ -9,8 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--- Script -->
-    <script src="/update.js"></script>
-    <script src="/url.js"></script>
+    <script type="text/javascript" src="update.js"></script>
+    <script type="text/javascript" src="url.js"></script>
     <style>
       body {
         font-family: "Lato", sans-serif;
@@ -34,7 +34,7 @@
         color: #000000;
         display: block;
       }
-      h6 {font-weight: 700;}
+      h5 {font-weight: 700;}
       .sidenav a:hover {
         color: orange;
       }
@@ -49,6 +49,29 @@
         font-size: 28px; /* Increased text to enable scrolling */
         padding: 0px 10px;
       }
+      .popup{
+          width: 500px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.2rem;
+          box-sizing: border-box;
+          border: black 2px solid;
+          padding: 25px 50px 50px 50px;
+      }
+      #error_message {
+          margin-bottom: 20px;
+          padding: 0;
+          background: #fd6464;
+          text-align: center;
+          font-size: 14px;
+          color: white;
+          transition: all 0.5s ease;
+      }
+
+      #pageData{display: none;}
+
       @media screen and (min-width: 768px) and (max-width:1028px) {
         strong {font-size: 0.9em;}
         .sidenav a {font-size: 18px;}
@@ -60,37 +83,40 @@
         .sidenav a {font-size: 16px; float: left;}
         .sidenav {width: 100%; height: auto; position: relative;}
         #content{margin-left: 0;}
+        .popup{width: 390px;}
       }
 
       @media screen and (min-width: 320px) and (max-width:479px) {
         strong {font-size: 0.7em; float: none; top: 0; text-align: center;}
         .sidenav a {font-size: 14px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h6 {font-size: 0.8em;}
+        h5 {font-size: 1.0em;}
         #content{margin-left: 0;}
+        .popup{width: 330px;}
       }
 
       @media screen and (max-width: 320px) {
         strong {font-size: 0.6em; float: none; text-align: center;}
         .sidenav a {font-size: 12px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h6 {font-size: 0.8em;}
+        h5 {font-size: 0.9em;}
         #content{margin-left: 0;}
+        .popup{width: 280px;}
       }
   </style>
 </head>
 <body>
-  <section>
+  <section id="pageData">
     <div class="container-fluid">
       <div class="sidenav">
-        <a><h5><strong>Covicheck Configurator</strong></h5></a>
-        <a href="/">Home</a>
+        <a><h4><strong>Covicheck Configurator</strong></h4></a>
+        <a href="index.html">Home</a>
         <a href="wifi_setting.html">WiFi Settings</a>
-        <a href="factory_settings.html" data-toggle="modal" data-target="#myModal_2">Factory Settings</a>
+        <a href="factory_settings.html">Factory Settings</a>
         <a href="update.html" style="color: orange;">Update</a>
       </div>
       <div id="content">
-        <h6 class="mt-3 text-center">Covicheck Firmware Update</h6>
+        <h5 class="mt-4">Covicheck Firmware Update</h5>
         <div class="card p-3 mt-3">
           <table border="0">
               <tr>
@@ -118,40 +144,24 @@
             
     </div>
   </section>
-
-      <!-- The Modal-2 -->
-     <div class="modal fade" id="myModal_2">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-          
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">Factory Settings</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="factory_settings.html" method="POST" onSubmit="return checkLoginPassword();">
-                    <div class="form-group">
-                      <label for="userId">User Id:</label>
-                      <input type="text" id="user" class="form-control" placeholder="Enter email" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="pwd">Password:</label>
-                      <input type="password" id="pass" class="form-control" placeholder="Enter password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            
+  <section id="modal">
+    <!-- Modal body -->
+    <div class="popup">
+      <h2 class="text-center p-3">User Login</h2>
+      <div id="error_message"></div>
+      <form>
+          <div class="form-group">
+            <label for="userId">User Id:</label>
+            <input type="text" id="userid" class="form-control" placeholder="Enter Id" required>
           </div>
-        </div>
-    </div> <!-- Modal-2 End -->
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="pwd" class="form-control" placeholder="Enter password" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="formSubmit">Submit</button>
+          <button type="button" class="btn btn-danger" style="float: right;" id="close">close</button>
+      </form>
+    </div>
+  </section>
 </body>
 </html>

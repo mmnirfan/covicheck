@@ -9,8 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--- Script -->
-    <script src="/factory.js"></script>
-    <script src="/url.js"></script>
+    <script type="text/javascript"  src="factory.js"></script>
+    <script type="text/javascript" src="url.js"></script>
     <style>
       body {
         font-family: "Lato", sans-serif;
@@ -49,17 +49,36 @@
       input {
         font-weight: bold;
       } 
-      h3{font-weight: 700;}     
+      h5 {font-weight: 700;}     
       .main {
         margin-left: 160px; /* Same as the width of the sidenav */
         font-size: 28px; /* Increased text to enable scrolling */
         padding: 0px 10px;
       }
+      .popup{
+          min-width: 500px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.2rem;
+          box-sizing: border-box;
+          border: black 2px solid;
+          padding: 25px 50px 50px 50px;
+      }
+      #error_message {
+          margin-bottom: 20px;
+          padding: 0;
+          background: #fd6464;
+          text-align: center;
+          font-size: 14px;
+          color: white;
+          transition: all 0.5s ease;
+      }
+      
+      #pageData{display: none;}
+      
       @media screen and (max-width: 1900px){
-          strong {font-size: 0.9em;}
-          .sidenav a {font-size: 18px;}
-          .sidenav {width: 163px;}
-          h3 {font-size: 1.4em;}
           #content{margin-left: 180px;}
           .card{width: 450px;}
         }
@@ -71,7 +90,6 @@
         strong {font-size: 0.9em;}
         .sidenav a {font-size: 18px;}
         .sidenav {width: 163px;}
-        h3 {font-size: 1.4em;}
         #content{margin-left: 180px;}
         .card{width: 350px;}
       }
@@ -79,16 +97,18 @@
         strong {font-size: 0.8em; float: left;}
         .sidenav a {font-size: 16px; float: left;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h3 {font-size: 1.3em;}
+        h5 {font-size: 1.2em;}
         #content{margin-left: 0;}
+        .popup{width: 390px;}
       }
 
       @media screen and (min-width: 320px) and (max-width:479px) {
         strong {font-size: 0.7em; float: none; top: 0; text-align: center;}
         .sidenav a {font-size: 14px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h3 {font-size: 1.2em;}
+        h5 {font-size: 1.1em;}
         #content{margin-left: 0;}
+        .popup{width: 330px;}
       }
       @media screen and (min-width: 321px) and (max-width:500px) {
         .card{width: auto;}
@@ -98,27 +118,28 @@
         strong {font-size: 0.6em; float: none; text-align: center;}
         .sidenav a {font-size: 12px; float: none; text-align: center;}
         .sidenav {width: 100%; height: auto; position: relative;}
-        h3 {font-size: 1.1em;}
+        h5 {font-size: 1.0em;}
         #content{margin-left: 0;}
         .card{width: auto;}
+        .popup{width: 280px;}
       }
     </style>
 </head>
 <body>
-  <section>
+  <section id="pageData">
     <div class="container-fluid">
       <div class="sidenav">
         <a><h4><strong>Covicheck Configurator</strong></h4></a>
-        <a href="/">Home</a>
+        <a href="index.html">Home</a>
         <a href="wifi_setting.html">WiFi Settings</a>
         <a href="factory_settings.html" style="color: orange;">Factory Settings</a>
-        <a href="update.html" data-toggle="modal" data-target="#myModal">Update</a>
+        <a href="update.html">Update</a>
       </div>
       <div id="content">
         <div class="row">
           <div class="col-12 col-lg-6 col-xl-6">
-            <div class="card p-3 mt-5">
-              <h3 class="p-3 text-center">Factory Setting</h3>
+            <h5 class="pt-5">Factory Setting</h5>
+            <div class="card p-3 mt-3">
               <form id="FactorySettingsFormId">
                   <div class="form-group">
                       <label for="Unit" class="col-12 col-sm-6 col-md-12 col-lg-12">Temp. Unit :</label>
@@ -175,8 +196,8 @@
             </div>
           </div>
           <div class="col-12 col-lg-6 col-xl-6">
-            <div class="card p-3 mt-5" id="current_config">
-              <h3 class="p-3 text-center">Current-Config</h3>
+            <h5 class="pt-5">Current-Config</h5>           
+            <div class="card p-3 mt-3" id="current_config">
               <form>
                 <div class="form-group row">
                   <label for="min Temp" class="col-6 col-sm-6 col-md-6 col-lg-6 col-form-label">Min Temp:</label>
@@ -219,46 +240,27 @@
             <button type="button" class="btn btn-success mt-5 mb-5" onclick="deviceReboot();">Reboot Device</button>
           </div>
         </div>
-        
-        
       </div>
     </div>
   </section>
-     <!-- The Modal -->
-     <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-          
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">User Login for Update</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="update.html" method="POST" onSubmit="return checkLoginPass();">
-                    <div class="form-group">
-                      <label for="userId">User Id:</label>
-                      <input type="text" id="userid" class="form-control" placeholder="Enter Id" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="password">Password:</label>
-                      <input type="password" id="pwd" class="form-control" placeholder="Enter password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            
+  <section id="modal">
+    <!-- Modal body -->
+    <div class="popup">
+      <h2 class="text-center p-3">User Login</h2>
+      <div id="error_message"></div>
+      <form>
+          <div class="form-group">
+            <label for="userId">User Id:</label>
+            <input type="text" id="userid" class="form-control" placeholder="Enter Id" required>
           </div>
-        </div>
-    </div> <!-- Modal End -->
-
-
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="pwd" class="form-control" placeholder="Enter password" required>
+          </div>
+          <button type="submit" class="btn btn-primary" id="formSubmit">Submit</button>
+          <button type="button" class="btn btn-danger" style="float: right;" id="close">close</button>
+      </form>
+    </div>
+  </section>
 </body>
 </html>

@@ -10,9 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--- Script -->
-    <script src="/main.js"></script>
-    <script src="/url.js"></script>
-
+    <script src="main.js"></script>
     <style>
         body {
           font-family: "Lato", sans-serif;
@@ -47,13 +45,17 @@
         }
         #content{margin-left: 200px;}
         .card {width: 550px; box-sizing: border-box; box-shadow: 3px 3px rgb(235, 235, 235);}
-
-        
+        #temp_unit_box{margin-bottom: 20px;}
+        #content h4 {font-weight: 700;}
         .main {
           margin-left: 160px; /* Same as the width of the sidenav */
           font-size: 28px; /* Increased text to enable scrolling */
           padding: 0px 10px;
         }
+        @media screen and (min-width: 1126px) and (max-width:1900px){
+          #temp_unit_box {position: absolute; left: 800px; top: 224px; width: 400px;}
+        }
+
         @media screen and (min-width: 768px) and (max-width:1028px) {
           strong {font-size: 0.9em;}
           .sidenav a {font-size: 18px;}
@@ -81,7 +83,7 @@
           h3 {font-size: 1.2em;}
           #content{margin-left: 0;}
           .card {width: auto;}
-          #object_temp_button {margin-top: 15px;}
+          #object_temp_button, #temp_unit_button {margin-top: 15px;}
           .mr-sm-2 {margin-right: 5px;}
         }
 
@@ -92,7 +94,7 @@
           h3 {font-size: 1.1em;}
           #content{margin-left: 0;}
           .card {width: auto;}
-          #object_temp_button {margin-top: 15px;}
+          #object_temp_button, #temp_unit_button {margin-top: 15px;}
           .mr-sm-2 {margin-right: 5px;}
         }
     </style>
@@ -101,15 +103,15 @@
     <section>
         <div class="container-fluid">
           <div class="sidenav">
-            <a><h5><strong>Covicheck Configurator</strong></h5></a>
+            <a><h4><strong>Covicheck Configurator</strong></h4></a>
             <a href="/" style="color: orange;">Home</a>
             <a href="wifi_setting.html">WiFi Settings</a>
-            <a href="factory_settings.html" data-toggle="modal" data-target="#myModal_2">Factory Settings</a>
-            <a href="update.html" data-toggle="modal" data-target="#myModal">Update</a>
+            <a href="factory_settings.html">Factory Settings</a>
+            <a href="update.html">Update</a>
           </div>
           <div id="content">
+            <h4 class="pt-4">Current-Config</h4>
             <div class="card p-3 mt-4">
-              <h3 class="p-3">Current-Config</h3>
               <form>
                 <div class="form-group row">
                   <label for="macId" class="col-sm-4 col-5 col-md-6 col-lg-6 col-form-label">MAC Id:</label>
@@ -144,87 +146,29 @@
               </form>
             </div>
             <div class="card p-3 mt-4">
-              <h3 class="p-3">Object Temperature</h3>
+              <h6 class="pt-3 pb-3">Object Temperature:</h6>
               <form class="form-inline">
                 <div class="form-row align-items-center">
-                  <label for="macId" class="mr-sm-2">Object Temp:</label>
-                  <input type="text" class="text-center mr-sm-2" id="object_temp_input" size="10" readonly class="form-control form-control-plaintext" value="">
+                  <input type="text" class="text-center mr-sm-2" id="object_temp_input" size="14" readonly class="form-control form-control-plaintext" value="">
                   <button id="object_temp_button" type="button" onclick="fetchObjectTemp();" class="btn btn-success">Scan Temperature</button>
                 </div>
               </form>
-              <h4 id="h"></h4>
+            </div>
+            <div class="card p-3 mt-4" id="temp_unit_box">
+              <h6 class="pt-3 pb-3">Temperature Unit:</h6>
+              <form class="form-inline">
+                <div class="form-row align-items-center">
+                  <select class="text-center mr-sm-2 form-control" id="temp_unit" style="width:170px" required>
+                    <option value disabled selected hidden>Select Temp Unit</option>
+                    <option>C</option>
+                    <option>F</option>
+                  </select>
+                  <button id="temp_unit_button" type="button"class="btn btn-success">Change Temp Unit</button>
+                </div>
+              </form>
             </div>
           </div> 
         </div>
     </section>
-    <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-          
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">User Login for Update</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="update.html" method="POST" onSubmit="return checkLoginPass();">
-                    <div class="form-group">
-                      <label for="userId">User Id:</label>
-                      <input type="text" id="userid" class="form-control" placeholder="Enter Id" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="password">Password:</label>
-                      <input type="password" id="pwd" class="form-control" placeholder="Enter password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    
-      <!-- The Modal-2 -->
-     <div class="modal fade" id="myModal_2">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-          
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">User Login Factory-Settings</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="factory_settings.html" method="POST" onSubmit="return checkLoginPassword();">
-                    <div class="form-group">
-                      <label for="userId">User Id:</label>
-                      <input type="text" id="user" class="form-control" placeholder="Enter Id" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="pwd">Password:</label>
-                      <input type="password" id="pass" class="form-control" placeholder="Enter password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            
-          </div>
-        </div>
-    </div> <!-- Modal-2 End -->
 </body>
 </html>

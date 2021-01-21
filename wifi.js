@@ -27,7 +27,7 @@ window.onload = function(){
          */
         // Define what happens in case of error
         xhttp.addEventListener(' error', function( event ) {
-        alert( 'Oops! Something went wrong.' );
+            alert( 'Oops! Something went wrong.' );
         } );
 
         function processRequest(e) {

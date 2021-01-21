@@ -1,77 +1,101 @@
-// ----- Login Script for Update -------- //
-function checkLoginPass() {
-    var login = "";
-    var pass = "";
-    login += document.getElementById("userid").value;
-    pass += document.getElementById("pwd").value;
-    // URL.....
-    url = "/login/";
-    data = {"id": login, "password": pass};
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(data));
-    xhttp.onreadystatechange = processRequest;
-    xhttp.addEventListener('error', function() {
-        alert( 'Oops! Something went wrong.' );
-    });
-    function processRequest(e) {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            let response = JSON.parse(xhttp.responseText);
-            document.getElementById("WifiSettingsHeaderID").innerHTML = response.result;
-            alert( 'Set SSID and Password Successfully.' );
-            if (response.result === "success") {
-                return true;
-            }
-            else if (response.result === "FAIL") {
-                alert("Wrong UserId or Password !");
-                console.log('wrong user id or password!');
-                return false;
-            }
-        }
-        else{
-            alert("Your processRequest is Failed !");
-            console.log("Your processRequest is Failed !");
-        }
-    }
-};
-/// ------ End ------- ///
+// window.onload = function() {
 
-// ----- Login Script for Factory Settings -------- //
+//     /// --- Login Form --- ///
+//     const modal = document.getElementById("modal");
+//     const pageData = document.getElementById("pageData");
+//     const Btn = document.getElementById("formSubmit");
+//     var error_message = document.getElementById("error_message");
+//     var text;
+//     Btn.addEventListener("click", (e) => {
+//         e.preventDefault();
+//         var login = "";
+//         var pass = "";
+//         login += document.getElementById("userid").value;
+//         pass += document.getElementById("pwd").value;
 
-function checkLoginPassword() {
-    var login = "";
-    var pass = "";
-    login = document.getElementById("user").value;
-    pass = document.getElementById("pass").value;
-    url = "/login/";
-    data = {"id": login, "password": pass};
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(data));
-    xhttp.onreadystatechange = processRequest;
-    xhttp.addEventListener('error', function() {
-        alert( 'Oops! Something went wrong.' );
+//         // URL.....
+//         url = "/login/";
+//         data = {"id": login, "password": pass};
+//         var postData = JSON.stringify(data);
+//         alert(postData);
+//         alert(url)
+//         var xhttp = new XMLHttpRequest();
+//         xhttp.open("POST", url, true);
+//         xhttp.setRequestHeader("Content-type", "application/json");
+//         xhttp.send(postData);
+//         xhttp.onreadystatechange = processRequest;
+//         xhttp.addEventListener('error', function() {
+//             alert( 'Oops! Something went wrong.' );
+//         });
+//         function processRequest(e) {
+//             e.preventDefault();
+//             if (xhttp.readyState == 4 && xhttp.status == 200) {
+//                 let response = JSON.parse(xhttp.responseText);
+//                 if (response.result === "success") {
+//                     pageData.style.display="block"
+//                     modal.style.display="none";
+//                     return true;
+//                 }
+//                 else {
+//                     text = "Wrong Email or Password !";
+//                     error_message.innerHTML = text;
+//                     console.log('wrong user id or password!');
+//                     return false;
+//                 }
+//             }
+//             else{
+//                 text = "Your processRequest is Failed !";
+//                 error_message.innerHTML = text;
+//                 console.log("Your processRequest is Failed !");
+//                 return false;
+//             }
+//         }
+//     });
+
+    
+//     /// --- Close Button --- ///
+//     const close = document.getElementById("close");
+//     close.addEventListener("click", function() {
+//         window.history.back();
+//     });
+
+// }
+
+window.onload = function() {
+
+    /// --- Login Form --- ///
+    const modal = document.getElementById("modal");
+    const pageData = document.getElementById("pageData");
+    const Btn = document.getElementById("formSubmit");
+    var error_message = document.getElementById("error_message");
+    var text;
+    Btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        var login = "";
+        var pass = "";
+        login += document.getElementById("userid").value;
+        pass += document.getElementById("pwd").value;
+
+       
+        if (login === "admin" && pass === "covicheck@123") {
+            pageData.style.display="block"
+            modal.style.display="none";
+            return true;
+            
+        }
+        else {
+            text = "Wrong Email or Password !";
+            error_message.innerHTML = text;
+            console.log('wrong user id or password!');
+            return false;
+        }
     });
-    function processRequest(e) {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            let response = JSON.parse(xhttp.responseText);
-            document.getElementById("WifiSettingsHeaderID").innerHTML = response.result;
-            alert( 'Set SSID and Password Successfully.' );
-            if (response.result === "success") {
-                return true;
-            }
-            else if (response.result === "fail") {
-                alert("Wrong UserId or Password !");
-                console.log('wrong user id or password!');
-                return false;
-            }
-        }
-        else{
-            alert("Your processRequest is Failed !");
-            console.log("Your processRequest is Failed !");
-        }
-    }
-};
-/// ------ End ------- ///
+
+    /// --- Close Button --- ///
+    const close = document.getElementById("close");
+    close.addEventListener("click", function() {
+        window.history.back();
+    });
+
+}
+
