@@ -71,13 +71,23 @@ window.onload = function() {
     var text;
     Btn.addEventListener("click", (e) => {
         e.preventDefault();
+        var userid = document.getElementById("userid").value;
+        var password = document.getElementById("pwd").value;
         var login = "";
         var pass = "";
-        login += document.getElementById("userid").value;
-        pass += document.getElementById("pwd").value;
+        login += userid;
+        pass += password;
 
-       
-        if (login === "admin" && pass === "covicheck@123") {
+        if (userid.length === 0) {
+            text = "Please Enter Valid User Id !";
+            error_message.innerHTML = text;
+        }
+        else if (password.length === 0) {
+            text = "Please Enter Valid Password !";
+            error_message.innerHTML = text;
+        }
+
+        else if (login === "admin" && pass === "covicheck@123") {
             pageData.style.display="block"
             modal.style.display="none";
             return true;
